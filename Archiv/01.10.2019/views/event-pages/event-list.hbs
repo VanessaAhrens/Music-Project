@@ -1,0 +1,14 @@
+<ul>
+  {{#each eventsFromDB}}
+  <li>
+    <h3><a href="/events/{{this.id}}"></a></h3>
+    <p>- created by {{this.owner.lastName}} </p>
+    <img src="{{this.imageUrl}}" alt="" width="300">
+    {{#if this.isOwner}}
+    <form action="/events/{{this._id}}/delete" method="POST">
+    <button type="submit">Delete</button>
+    </form>
+    {{/if}}
+  </li>
+  {{/each}}
+</ul>
