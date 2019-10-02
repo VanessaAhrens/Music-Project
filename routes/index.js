@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
-const bcryptSalt = 10;
+const path = require('path');           /*Änderung Vanessa */
+const saltRounds = 10;
+const salt = bcrypt.genSalt(saltRounds);
 /* Model abfragen */
 const User = require('./../models/user-model.js')
 
@@ -10,12 +12,10 @@ router.get('/', (req, res, next) => {
   res.render('index');
 });
 router.get('/home', (req, res, next) => {
+ 
   res.render('index');
 });
-/* GET events page */
-router.get('/events', (req, res, next) => {
-  res.render('events');
-});
+
 /* GET News on Music page */
 router.get('/news', (req, res, next) => {
   res.render('news');
@@ -25,6 +25,27 @@ router.get('/news', (req, res, next) => {
 router.get('/signup', (req, res, next) => {
   res.render('auth/signup');
 });
+// Get Login Page
+router.get('/login', (req, res, next) => {
+  res.render('auth/login');
+});
+
+//GET Lessons-private page
+ router.get('/lessons-private', (req, res, next) => {
+  res.render('auth/lessons-private');
+});
+
+router.get('/logOut', (req,res,next) => {
+  req.session.destroy((err)=>{
+    res.redirect("/")
+
+  })
+});
+ /*Änderung Vanessa */
+router.get('/', function(req,res){
+  console.log("Silly")
+  res.sendFile(path.join(__dirname,'../views/index.hbs'));
+  });
 
 // Register:
 router.post('/signup', (req, res, next) => {
@@ -32,17 +53,20 @@ router.post('/signup', (req, res, next) => {
   const firstName = req.body.firstName;
   const email = req.body.email;
   const password = req.body.password;
+  const salt = bcrypt.genSaltSync(saltRounds);
+  const hashPassword = bcrypt.hashSync(password,salt);
 
 
   const newUser = new User({
     lastName,
     firstName,
     email,
-    password
+    hashPassword
   })
 
+
   if (email == '' || password == '' || lastName == '' || firstName == '') {
-    res.render('index',{
+    res.render('events',{
       errorMessage: "Please set some data"
      });
     return;
@@ -56,16 +80,19 @@ router.post('/signup', (req, res, next) => {
         return;
       }
 
-      const salt = bcrypt.genSaltSync(bcryptSalt);
-      const hashPassword = bcrypt.hashSync(password, salt);
+ 
 
       User.create({
         lastName: lastName,
         firstName: firstName,
         email: email,
-        password: password
+        password: hashPassword
       })
         .then(user => {
+          if(!user){
+            res.render('auth/lessons-private')
+            errorMessage: "The username doesn't exists"
+          }
           // if all good, log in the user automatically
           req.session.currentUser = user;
           res.redirect("/");
@@ -73,15 +100,16 @@ router.post('/signup', (req, res, next) => {
         .catch(err => next(err)); //closing User.create()
     })
 
-  res.render('auth/signup-success');
+  
 });
 
 /* GET Lessons page */
+
 router.get('/lessons', (req, res, next) => {
   res.render('lessons');
 });
-/* Route from successfull login in lessons.hbs to lessons-private.hbs if the variables in email/ password mach with the object in mongoDB */
-router.post('/lessons', (req, res, next) => {
+// Route from successfull login in lessons.hbs to lessons-private.hbs if the variables in email/ password mach with the object in mongoDB 
+router.post('/login', (req, res, next) => {
 
   const email = req.body.email;
   const password = req.body.password;
@@ -91,29 +119,34 @@ router.post('/lessons', (req, res, next) => {
     password
   });
   
-  if (email === "" && password === "") {
-    res.render('lessons')
+  if (email === "" || password === "") {
+    res.render('auth/login',{
+      errorMessage: "Please enter both, email and password to login"
+    });
     return;
   }
   User.findOne({ email })
  .then(user => {
-     if (!user) {
-       res.render("lessons", {
-         errorMessage: "The username doesn't exist."
-       });
+  if(bcrypt.compareSync(req.body.password,user.password)){
+    req.session.currentUser = user;
+    res.render('auth/lessons-private')
+    console.log("test"); 
        return;
      }
-console.log(User.password, ' ', user.password);
-     if (User.password === user.password) {
+
+     if (req.body.password === user.password) {
        // Save the login in the session!
        console.log('### ', req.session);
        req.session.currentUser = user;
-       res.redirect("/");
+       res.redirect("/lessons-private");
+
      } else {
-       console.log('#### passwort nicht gleich');
-       res.render("login", {
+       
+       res.render("auth/login", {
          errorMessage: "Incorrect password"
-       });
+        
+        });
+
      }
  })
  .catch(error => {
@@ -121,11 +154,6 @@ console.log(User.password, ' ', user.password);
  })
 })
 
-/* GET Lessons-private page*/
-router.get('/lessons-private', (req, res, next) => {
-  console.log("fuck you")
-  res.render('auth/lessons-private');
-})
 
 
 module.exports = router;
