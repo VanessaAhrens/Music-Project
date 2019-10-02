@@ -1,10 +1,14 @@
 <div class = "menuAfterHome">
+{{#if currentUser}}
 <a class = "item" href="Home">Home</a>
-<a class = "item" href="Events">Events</a>
+<a class = "item" href="events">Events</a>
+<a class = "item" href="create-event">Create Event</a>
 <a class = "item" href="news">News on Music</a>
 <a class = "item" href="Lessons">Lessons</a>
+{{else}}
 <a class = "item" href="Login">Login</a>
-<a class = "item"  href="signup">Sign Up</a>
+<a class = "item" id = 'Register' href="signup">Sign Up</a>
+{{/if}}
 </div>
 
 <body class="login">

@@ -15,22 +15,7 @@ router.get('/home', (req, res, next) => {
  
   res.render('index');
 });
-/* GET events page */
-router.get('/events', (req, res, next) => {
 
-  Event.find().populate('owner')
-  .then(eventsFromDB =>  {
-    eventsFromDB.forEach(oneEvent => {
-      if(req.session.currentUser){
-        if(oneEvent.owner.equals(rq.session.currentUser._id)){
-          oneEvent.isOwner = true;
-        }
-      }
-    })
-    res.render('event-pages/event-list',{eventsFromDB})
-  })
-  .catch(err => next(err))
-});
 /* GET News on Music page */
 router.get('/news', (req, res, next) => {
   res.render('news');
@@ -154,7 +139,6 @@ router.post('/login', (req, res, next) => {
        console.log('### ', req.session);
        req.session.currentUser = user;
        res.redirect("/lessons-private");
-      // console.log(hashPassword);
 
      } else {
        
@@ -163,7 +147,6 @@ router.post('/login', (req, res, next) => {
         
         });
 
-        console.log("test1: ",hashPassword);
      }
  })
  .catch(error => {
