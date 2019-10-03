@@ -1,6 +1,18 @@
+<div class = "menuAfterHome">
+{{#if currentUser}}
+<a class = "item" href="Home">Home</a>
+<a class = "item" href="events">Events</a>
+<a class = "item" href="create-event">Create Event</a>
+<a class = "item" href="news">News on Music</a>
+<a class = "item" href="Lessons">Lessons</a>
+{{else}}
+<a class = "item" href="Login">Login</a>
+<a class = "item" id = 'Register' href="signup">Sign Up</a>
+{{/if}}
+</div>
+
 <h1>Create a new event</h1>
-{{!-- if in the form you want top upload any kind of files (images, music, ...)
-you need to add enctype="multipart/form-data" --}}
+
 <form action='/create-event' method='POST'>
  <label for="name">Name</label>
  <input type="text" name="name">
