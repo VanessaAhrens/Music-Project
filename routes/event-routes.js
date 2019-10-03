@@ -16,6 +16,8 @@ function isLoggedIn(req, res, next){
 router.get('/create-event', (req, res, next) => {
  res.render('event-pages/add-event.hbs');
 });
+
+
 //  <input type="file" name="imageUrl" id="">
 //
 //router.post('/create-event', fileUploader.single('imageUrl'),(req, res, next) => {
