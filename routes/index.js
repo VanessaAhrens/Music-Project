@@ -30,10 +30,10 @@ router.get('/login', (req, res, next) => {
   res.render('auth/login');
 });
 
-//GET Lessons-private page
- router.get('/lessons-private', (req, res, next) => {
-  res.render('auth/lessons-private');
-});
+/*GET Lessons-private page
+ router.get('/', (req, res, next) => {
+  res.render('index');
+});*/
 
 router.get('/logOut', (req,res,next) => {
   req.session.destroy((err)=>{
@@ -43,7 +43,6 @@ router.get('/logOut', (req,res,next) => {
 });
  /*Änderung Vanessa */
 router.get('/', function(req,res){
-  console.log("Silly")
   res.sendFile(path.join(__dirname,'../views/index.hbs'));
   });
 
@@ -90,7 +89,7 @@ router.post('/signup', (req, res, next) => {
       })
         .then(user => {
           if(!user){
-            res.render('auth/lessons-private')
+            res.render('index')
             errorMessage: "The username doesn't exists"
           }
           // if all good, log in the user automatically
@@ -103,10 +102,10 @@ router.post('/signup', (req, res, next) => {
   
 });
 
-/* GET Lessons page */
+/* GET Lessons page */ /*Änderung Vanessa: zurück zu Home, lessons kommt raus*/
 
-router.get('/lessons', (req, res, next) => {
-  res.render('lessons');
+router.get('/', (req, res, next) => {
+  res.render('index');
 });
 // Route from successfull login in lessons.hbs to lessons-private.hbs if the variables in email/ password mach with the object in mongoDB 
 router.post('/login', (req, res, next) => {
@@ -129,7 +128,7 @@ router.post('/login', (req, res, next) => {
  .then(user => {
   if(bcrypt.compareSync(req.body.password,user.password)){
     req.session.currentUser = user;
-    res.render('auth/lessons-private')
+    res.render('index')
     console.log("test"); 
        return;
      }
@@ -138,7 +137,7 @@ router.post('/login', (req, res, next) => {
        // Save the login in the session!
        console.log('### ', req.session);
        req.session.currentUser = user;
-       res.redirect("/lessons-private");
+       res.redirect("/");
 
      } else {
        
