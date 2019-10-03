@@ -1,24 +1,13 @@
-/*body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-
-
-a {
-  color: #00B7FF;}
-}*/
 
 /*-webkit-any-link is in developer tools a standard default purple which has to be set off like this*/
-
 .menuAfterHome {
   a:-webkit-any-link {
     color: white;
   }
 }
-
 a:-webkit-any-link {
   color: black;
 }
-
 h1 {
   font-family: Georgia, 'Times New Roman', Times, serif;
   color: black;
@@ -27,18 +16,6 @@ h1 {
   margin-top: 4rem;
   margin-bottom: 3rem;
   }
-
-/* Änderungen Vanessa */  
-/*.menu{  
-  width: 100%;
-  height: 10%;
-  text-decoration: none;
-  color: #717171;
-  font: 25px Georgia, 'Times New Roman', Times, serif;
-  justify-content: center;
-}*/
-
-
 .menu {
   display: flex;
   justify-content: space-evenly;
@@ -48,7 +25,6 @@ h1 {
   font-size: 40px;
   color:black;
 }
-
 .menuAfterHome{
   display: flex;
   justify-content: space-evenly;
@@ -58,13 +34,10 @@ h1 {
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 40px;
   color: white;}
-
-
 .item {
   text-decoration: none;
   align-items: center;
   }
-
 footer{
   font-family: Georgia;
   text-align: center;
@@ -173,13 +146,6 @@ background-size: cover;
 color: white;
 font-size: 30px;
 }
-/*geht nicht, sonst wird durch{{body}} auch der bilder slide zum hingergrundbild
-.events-header {
-  color: white;
-  background-color: transparent;
-  margin: 
-} 
-*/
 
 .news {
 background-image: url(../images/news.jpg);
@@ -300,7 +266,6 @@ margin-top: 5rem;
     color: white;
   }
 }
-
 .deleteButton {
   color: black;
   font-size: 20px;
@@ -311,6 +276,7 @@ margin-top: 5rem;
   margin-top: 1rem;
   }
 
+//event-details//  
 .eventsCentered {
   margin: auto;
   margin-top: 9rem;
@@ -335,3 +301,16 @@ h4{
   border: none;
   margin-top: 1rem;
 }
+/*
+input {
+  float: right;
+  margin-right: 17rem;
+}
+.alignedInputLabelCreate {
+  display: flex;
+  align-items: baseline;
+}*/
+/*
+.formCreate {
+  
+}*/
