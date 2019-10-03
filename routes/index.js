@@ -66,7 +66,7 @@ router.post('/signup', (req, res, next) => {
 
 
   if (email == '' || password == '' || lastName == '' || firstName == '') {
-    res.render('events',{
+    res.render('auth/signup',{
       errorMessage: "Please set some data"
      });
     return;
