@@ -1,5 +1,6 @@
-<h1>Welcome to the details page of the {{ event.name }} event</h1>
-<p>This event is posted by: <b> {{ event.owner.fullName }} </b></p>
+<body class = "event-details">
+<h4>Welcome to the details page of the {{ event.name }} event</h4>
+  <p>This event is posted by: <b> {{ event.owner.fullName }} </b></p>
 <hr>
 <h3>Description:</h3>
 <p> {{ event.description }}</p>
@@ -43,3 +44,4 @@
    {{/if}}
  {{/each}}
 {{/if}}
+</body>

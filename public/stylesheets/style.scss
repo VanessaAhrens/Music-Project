@@ -217,7 +217,13 @@ font-size: 30px;
   font-size: 30px;
   font-weight: 100;
 }
-
+.event-details {
+  background-image: url(../images/event.jpg);
+  background-size: cover;
+  color: white;
+  font-size: 30px;
+  font-weight: 100;
+}
 
 #events {
   text-align:center;
@@ -306,11 +312,26 @@ margin-top: 5rem;
   }
 
 .eventsCentered {
-margin: auto;
-margin-top: 9rem;
-width: 50%;
-text-align: center;  
+  margin: auto;
+  margin-top: 9rem;
+  width: 50%;
+  text-align: center;  
 }
 ul {
   list-style-type: none;
+}
+
+h4{
+  color: white;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size:40px;
+}
+#toggle-button{
+  color: black;
+  font-size: 20px;
+  width: 200px;
+  height: 60px;
+  background-color:white;
+  border: none;
+  margin-top: 1rem;
 }
