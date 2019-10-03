@@ -12,17 +12,18 @@
 </div>
 
 <body class="login">
-<h2>Login for get in touch with Musicians helping you to reach your aim!</h2>
+<div class = "centerLogin">
+<h2>Login to be up to date about music events</h2>
 <form action="/login" method="POST" id="login-form">
-<label for="">Email</label>
+<label for="" class="textFieldLeft">Email</label>
 <input type="text" name="email">
 <br><br>
-<label for="">Password</label>
+<label for=""class="textFieldLeft">Password</label>
 <input type="password" name="password">
 <br><br>
-<button type="submit" id = "login">Login</button>
+<button type="submit" class = "loginButton">Login</button>
 </form>
-
+</div>
 {{#if errorMessage}}
 <div class="error-message">{{errorMessage}}</div>
 {{/if}}

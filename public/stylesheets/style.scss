@@ -79,7 +79,7 @@ footer{
   max-width: 1000px;
   position: relative;
   margin: auto;
-}
+ }
 
 /* Hide the images by default */
 .mySlides {
@@ -200,6 +200,7 @@ font-size: 30px;
   background-size: cover;
   color: white;
   font-size: 30px;
+  font-weight: 100;
 }
 
 .signup{
@@ -222,4 +223,41 @@ font-size: 30px;
   text-align:center;
   margin-top: 7rem;
   font-size: 40px;
+} 
+//Login-page styles//
+
+.centerLogin {
+margin: auto;
+width: 50%;
+text-align: center;  
+}
+.textFieldLeft {
+width: 10%px;
+justify-items: left;
+text-align: left;
+}
+
+input {
+  float: right;
+  margin-right: 17rem;
+}
+label {
+  float: left;
+  margin-left: 22rem;
+}
+.loginButton {
+color: black;
+font-size: 20px;
+width: 70px;
+height: 40px;
+background-color:white;
+border: none;
+margin-top: 5rem;
+}
+.error-message {
+  margin: auto;
+  width: 50%;
+  text-align: center;  
+  margin-top: 5rem;
+  color: red;
 }

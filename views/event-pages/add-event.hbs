@@ -1,17 +1,15 @@
-<div class = "menuAfterHome">
+<div class = "menu">
 {{#if currentUser}}
 <a class = "item" href="Home">Home</a>
-<a class = "item" href="events">Events</a>
-<a class = "item" href="create-event">Create Event</a>
-<a class = "item" href="news">News on Music</a>
-<a class = "item" href="Lessons">Lessons</a>
+<a class = "item" href="events">All Events</a>
+<a class = "item" href="LogOut">Logout</a>
 {{else}}
 <a class = "item" href="Login">Login</a>
 <a class = "item" id = 'Register' href="signup">Sign Up</a>
 {{/if}}
 </div>
 
-<h1>Create a new event</h1>
+<h1>Create a new event and let other users contribute</h1>
 
 <form action='/create-event' method='POST'>
  <label for="name">Name</label>
