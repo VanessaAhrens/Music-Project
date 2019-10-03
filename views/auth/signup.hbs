@@ -2,15 +2,14 @@
 {{#if currentUser}}
 <a class = "item" href="Home">Home</a>
 <a class = "item" href="events">Events</a>
-<a class = "item" href="create-event">Create Event</a>
-<a class = "item" href="news">News on Music</a>
-<a class = "item" href="Lessons">Lessons</a>
+<a class = "item" href="create-event">Create an Event</a>
 {{else}}
 <a class = "item" href="Login">Login</a>
 <a class = "item" id = 'Register' href="signup">Sign Up</a>
 {{/if}}
 </div>
 <body class="signup">
+<div class = "SignUp">
 <h2>Be part of our Music Home</h2>
 <h3>Register now</h3>
 
@@ -28,9 +27,10 @@
 <label for="">Password</label>
 <input type="password" name="password">
 <br><br>
-<button type="submit" id = "Register">Register</button>
+<button type="submit" class = "register "id = "Register">Register</button>
 </form>
+</div>
 {{#if errorMessage}}
-<div class = "errorMessage">{{errorMessage}}</div>
+<div class = "error-message">{{errorMessage}}</div>
 {{/if}}
 </body>
