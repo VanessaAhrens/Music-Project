@@ -210,6 +210,15 @@ font-size: 30px;
   font-size: 30px;
 
 }
+.event-list{
+  background-image: url(../images/stage.jpg);
+  background-size: cover;
+  color: white;
+  font-size: 30px;
+  font-weight: 100;
+}
+
+
 #events {
   text-align:center;
   margin-top: 7rem;
@@ -278,4 +287,30 @@ height: 40px;
 background-color:white;
 border: none;
 margin-top: 5rem;
+}
+
+.settings-events {
+  a:-webkit-any-link {
+    color: white;
+  }
+}
+
+.deleteButton {
+  color: black;
+  font-size: 20px;
+  width: 70px;
+  height: 40px;
+  background-color:white;
+  border: none;
+  margin-top: 1rem;
+  }
+
+.eventsCentered {
+margin: auto;
+margin-top: 9rem;
+width: 50%;
+text-align: center;  
+}
+ul {
+  list-style-type: none;
 }

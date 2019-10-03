@@ -1,4 +1,4 @@
-<div class = "menu">
+<div class = "menuAfterHome">
 {{#if currentUser}}
 <a class = "item" href="Home">Home</a>
 <a class = "item" href="create-event">Create Event</a>
@@ -9,7 +9,9 @@
 {{/if}}
 </div>
 
-<ul>
+<body class="event-list">
+  <div class = "eventsCentered">
+<ul class = "settings-events">
   {{#each eventsFromDB}}
   <li>
     <h3><a href="/events/{{this.id}}">{{this.name}}</a></h3>
@@ -17,9 +19,11 @@
     <img src="{{this.imageUrl}}" alt="" width="300">
     {{#if this.isOwner}}
     <form action="/events/{{this._id}}/delete" method="POST">
-    <button type="submit">Delete</button>
+    <button type="submit" class = "deleteButton">Delete</button>
     </form>
     {{/if}}
   </li>
   {{/each}}
 </ul>
+</div>
+</body>
