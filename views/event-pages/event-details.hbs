@@ -1,4 +1,3 @@
-<body class = "event-details">
 <h4>Welcome to the details page of the {{ event.name }} event</h4>
   <p>This event is posted by: <b> {{ event.owner.fullName }} </b></p>
 <hr>
@@ -8,8 +7,8 @@
 <h3>Gallery:</h3>
 <img src="{{event.imageUrl}}" alt="" width="300">
 {{#if event.isOwner}}
- <button id="toggle-button">Update event details</button>
- <form action="/events/{{event._id}}/update" method="post" id="edit-form" hidden="true"
+ <a href="/events/{{event._id}}/update">Update event details</a>
+<form action="/events/{{event._id}}/update" method="POST" id="edit-form" hidden="true"
  enctype='multipart/form-data'> {{!-- :rakete: enctype needs to be here if there is anything type="file" in the form --}}
    <label for="">Name</label>
    <input type="text" name="name" id="" value="{{event.name}}">

@@ -28,11 +28,11 @@ router.get('/create-event', (req, res, next) => {
  
  const nameEvent = req.body.name;
  const descriptionEvent = req.body.description;
- 
+ const imageUrl = req.body.imageUrl;
  Event.create({
    name: nameEvent,
    description: descriptionEvent,
-   imageUrl: '',
+   imageUrl: imageUrl,
    owner: req.session.currentUser._id
  })
  .then( newEvent => {
@@ -59,7 +59,7 @@ router.get('/events', (req, res, next) => {
  })
  .catch( err => next(err) )
 })
-// get the details of a specific room
+// get the details of a specific event
 router.get('/events/:eventId',isLoggedIn, (req, res, next) => {
  Event.findById(req.params.eventId).populate('owner')
  .populate({path: 'reviews', populate: {path:'user'}})
@@ -71,20 +71,32 @@ router.get('/events/:eventId',isLoggedIn, (req, res, next) => {
    })
    .catch( err => next(err) )
  })
-// post => save updates in the specific room
-router.post('/events/:eventId/update', (req, res, next) => {
- const { name, description } = req.body;
- const updatedEvent = {
-   name,
-   description,
-    owner: req.session.currentUser._id                                                }
- console.log(req.session.currentUser._id)
- Event.findByIdAndUpdate(req.params.eventId, updatedEvent) // <----------
- .then( theUpdatedEvent => {
-   res.redirect(`/events/${req.params.eventId}`);
- } )
- .catch( err => next(err) )
-})
+// post => save updates in the specific event
+router.get('/events/:eventId/update',isLoggedIn,(req,res,next) => {
+  Event.findById(req.params.eventId).populate('owner')
+  .populate({path: 'reviews', populate: {path:'user'}})
+  .then(foundEvent => {
+    if(foundEvent.owner.equals(req.session.currentUser._id)){
+      foundEvent.isOwner = true;
+    }
+    res.render('event-pages/event-update', { event: foundEvent } )
+    })
+    .catch( err => next(err) )
+  })
+
+  router.post('/events/:eventId/update', (req, res, next) => {
+    const { name, description } = req.body;
+    const updatedEvent = {
+      name,
+      description,
+       owner: req.session.currentUser._id                                                }
+    console.log(req.session.currentUser._id)
+    Event.findByIdAndUpdate(req.params.eventId, updatedEvent) // <----------
+    .then( theUpdatedEvent => {
+     res.render('event-pages/event-details', { event: theUpdatedEvent } )
+    } )
+    .catch( err => next(err) )
+   })
 // delete a event
 router.post('/events/:id/delete', (req, res, next) => {
  Event.findByIdAndDelete(req.params.id)
