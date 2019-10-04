@@ -156,7 +156,7 @@ footer {
   font-weight: 100; }
 
 .signup {
-  background-image: url(../images/signup.jpg);
+  background-image: url(../images/stage.jpg);
   background-size: cover;
   color: white;
   font-size: 30px; }
@@ -214,7 +214,7 @@ text-align: left;
   height: 40px;
   background-color: white;
   border: none;
-  margin-top: 5rem; }
+  margin-top: 2rem; }
 
 .error-message {
   margin: auto;
@@ -290,5 +290,10 @@ form {
   display: flex;
   flex-direction: column;
   max-width: 40%; }
+
+.centerHeaderLogin {
+  text-align: center;
+  margin-top: 5rem;
+  font-family: Georgia, 'Times New Roman', Times, serif; }
 
 /*# sourceMappingURL=style.css.map */
