@@ -128,8 +128,10 @@ router.post('/login', (req, res, next) => {
  .then(user => {
   if(bcrypt.compareSync(req.body.password,user.password)){
     req.session.currentUser = user;
-    res.render('index')
-    console.log("test", req.session.currentUser); 
+    //res.render('index');
+    res.redirect("/");
+    location.reload(true);
+
        return;
      }
 
@@ -137,9 +139,9 @@ router.post('/login', (req, res, next) => {
        // Save the login in the session!
        console.log('### ', req.session);
        req.session.currentUser = user;
-       //res.redirect("/");
-       res.render('index')
-       
+       res.redirect("/");
+       location.reload(true);
+
      } else {
        
        res.render("auth/login", {
