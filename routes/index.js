@@ -129,7 +129,7 @@ router.post('/login', (req, res, next) => {
   if(bcrypt.compareSync(req.body.password,user.password)){
     req.session.currentUser = user;
     res.render('index')
-    console.log("test"); 
+    console.log("test", req.session.currentUser); 
        return;
      }
 
