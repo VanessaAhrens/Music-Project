@@ -188,24 +188,25 @@ footer {
   margin-top: 7rem;
   font-size: 40px; }
 
-.centerLogin {
-  margin: auto;
-  width: 50%;
-  text-align: center; }
-
+/*.centerLogin {
+margin: auto;
+width: 50%;
+text-align: center;  
+}
 .textFieldLeft {
-  width: 10%px;
-  justify-items: left;
-  text-align: left; }
+width: 10%px;
+justify-items: left;
+text-align: left;
+}
 
-input {
+.loginInput {
   float: right;
-  margin-right: 17rem; }
-
-label {
+  margin-right: 17rem;
+}
+.loginLabel {
   float: left;
-  margin-left: 22rem; }
-
+  margin-left: 22rem;
+}*/
 .loginButton {
   color: black;
   font-size: 20px;
@@ -284,5 +285,10 @@ input {
 .formCreate {
   
 }*/
+form {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 40%; }
 
 /*# sourceMappingURL=style.css.map */

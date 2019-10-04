@@ -207,7 +207,7 @@ font-size: 30px;
 } 
 //Login-page styles//
 
-.centerLogin {
+/*.centerLogin {
 margin: auto;
 width: 50%;
 text-align: center;  
@@ -218,14 +218,14 @@ justify-items: left;
 text-align: left;
 }
 
-input {
+.loginInput {
   float: right;
   margin-right: 17rem;
 }
-label {
+.loginLabel {
   float: left;
   margin-left: 22rem;
-}
+}*/
 .loginButton {
 color: black;
 font-size: 20px;
@@ -314,3 +314,10 @@ input {
 .formCreate {
   
 }*/
+
+form {
+ margin: 0 auto;
+ display: flex;
+ flex-direction: column;
+ max-width: 40%;
+}
