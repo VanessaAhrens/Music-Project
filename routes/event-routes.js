@@ -15,6 +15,7 @@ function isLoggedIn(req, res, next){
 // GET route to create a event
 router.get('/create-event', (req, res, next) => {
  res.render('event-pages/add-event.hbs');
+ location.reload(true);
 });
 
 
@@ -38,6 +39,7 @@ router.get('/create-event', (req, res, next) => {
  .then( newEvent => {
    // console.log('event created: ', newEvent)
    res.render('event-pages/event-list', {eventsFromDB: newEvent});
+   location.reload(true);
  } )
  .catch( err => next(err) )
 });
@@ -56,6 +58,7 @@ router.get('/events', (req, res, next) => {
    })
   
    res.render('event-pages/event-list', { eventsFromDB: allEvents })
+   location.reload(true);
  })
  .catch( err => next(err) )
 })
@@ -68,6 +71,7 @@ router.get('/events/:eventId',isLoggedIn, (req, res, next) => {
      foundEvent.isOwner = true;
    }
    res.render('event-pages/event-details', { event: foundEvent } )
+   location.reload(true);
    })
    .catch( err => next(err) )
  })
@@ -80,6 +84,7 @@ router.get('/events/:eventId/update',isLoggedIn,(req,res,next) => {
       foundEvent.isOwner = true;
     }
     res.render('event-pages/event-update', { event: foundEvent } )
+    location.reload(true);
     })
     .catch( err => next(err) )
   })
@@ -94,6 +99,7 @@ router.get('/events/:eventId/update',isLoggedIn,(req,res,next) => {
     Event.findByIdAndUpdate(req.params.eventId, updatedEvent) // <----------
     .then( theUpdatedEvent => {
      res.render('event-pages/event-details', { event: theUpdatedEvent } )
+     location.reload(true);
     } )
     .catch( err => next(err) )
    })
@@ -102,6 +108,7 @@ router.post('/events/:id/delete', (req, res, next) => {
  Event.findByIdAndDelete(req.params.id)
  .then(() => {
    res.redirect('/events');
+   location.reload(true);
  })
  .catch(err => next(err));
 })
