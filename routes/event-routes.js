@@ -15,7 +15,6 @@ function isLoggedIn(req, res, next){
 // GET route to create a event
 router.get('/create-event', (req, res, next) => {
  res.render('event-pages/add-event.hbs');
- location.reload(true);
 });
 
 
@@ -29,20 +28,27 @@ router.get('/create-event', (req, res, next) => {
  
  const nameEvent = req.body.name;
  const descriptionEvent = req.body.description;
- const imageUrl = req.body.imageUrl;
+  let ownerId;
+
+ if (req.session.currentUser) {
+   ownerId =  req.session.currentUser._id;
+ } else {
+   ownerId =  "" + Math.random()*10;
+ }
+ 
  Event.create({
    name: nameEvent,
    description: descriptionEvent,
-   imageUrl: imageUrl,
-   owner: req.session.currentUser._id
+   owner: ownerId
  })
  .then( newEvent => {
    // console.log('event created: ', newEvent)
-   res.render('event-pages/event-list', {eventsFromDB: newEvent});
-   location.reload(true);
+   //res.render('event-pages/event-list', {eventsFromDB: newEvent});
+   res.redirect('/events')
  } )
  .catch( err => next(err) )
 });
+
 // show all events
 router.get('/events', (req, res, next) => {
  Event.find().populate('owner')
@@ -58,7 +64,6 @@ router.get('/events', (req, res, next) => {
    })
   
    res.render('event-pages/event-list', { eventsFromDB: allEvents })
-   location.reload(true);
  })
  .catch( err => next(err) )
 })
@@ -71,7 +76,6 @@ router.get('/events/:eventId',isLoggedIn, (req, res, next) => {
      foundEvent.isOwner = true;
    }
    res.render('event-pages/event-details', { event: foundEvent } )
-   location.reload(true);
    })
    .catch( err => next(err) )
  })
@@ -84,7 +88,6 @@ router.get('/events/:eventId/update',isLoggedIn,(req,res,next) => {
       foundEvent.isOwner = true;
     }
     res.render('event-pages/event-update', { event: foundEvent } )
-    location.reload(true);
     })
     .catch( err => next(err) )
   })
@@ -99,7 +102,6 @@ router.get('/events/:eventId/update',isLoggedIn,(req,res,next) => {
     Event.findByIdAndUpdate(req.params.eventId, updatedEvent) // <----------
     .then( theUpdatedEvent => {
      res.render('event-pages/event-details', { event: theUpdatedEvent } )
-     location.reload(true);
     } )
     .catch( err => next(err) )
    })
@@ -108,7 +110,6 @@ router.post('/events/:id/delete', (req, res, next) => {
  Event.findByIdAndDelete(req.params.id)
  .then(() => {
    res.redirect('/events');
-   location.reload(true);
  })
  .catch(err => next(err));
 })
