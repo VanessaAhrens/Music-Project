@@ -137,8 +137,9 @@ router.post('/login', (req, res, next) => {
        // Save the login in the session!
        console.log('### ', req.session);
        req.session.currentUser = user;
-       res.redirect("/");
-
+       //res.redirect("/");
+       res.render('index')
+       
      } else {
        
        res.render("auth/login", {
